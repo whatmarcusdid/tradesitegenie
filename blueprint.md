@@ -2,21 +2,23 @@
 
 ## Overview
 
-This project is a Next.js application integrated with Firebase. It will use Firebase for backend services like authentication and database.
+This project is a Next.js application with a sign-in page. The application is styled with modern design principles and includes a custom font.
 
-## Implemented Features
+## Design and Features
 
-*   **Firebase Project Initialization:** The project is initialized with Firebase.
-*   **Firestore:** Firestore is set up as the database.
-*   **Firebase Configuration:** A Firebase configuration file has been created at `lib/firebaseConfig.ts`.
-*   **Environment Variables:** The Firebase project credentials have been added to a `.env.local` file.
-*   **Authentication:**
-    *   Created a `Protected.tsx` component to protect routes.
-    *   Created a sign-in page at `/signin`.
-    *   Created a protected dashboard page at `/dashboard`.
+### Sign-in Page
 
-## Current Plan
+*   **Layout:** The sign-in page is centered vertically and horizontally.
+*   **Header:** A header is displayed at the top of the page with the logo aligned to the left. The header has a background color of #2D6E75 at 12% opacity.
+*   **Logo:** The logo text is "Codelab". It uses the "Unbounded" font from Google Fonts and has a hover effect that changes the color of the text.
+*   **Form:** A sign-in form is displayed in the center of the page. The main content area has a large padding, a gap between elements, and a gradient background. The sign-in title container is a flex container with a fixed width and height, and its items are aligned to the start.
+*   **Sign-in Title:** The sign-in title is stretched to fill the container, centered, and styled with the "Unbounded" font.
 
-*   Create a sign-up page.
-*   Implement sign-out functionality.
-*   Refine the UI and add more features to the dashboard.
+### Styling
+
+*   **Global Styles:** The application uses global styles defined in `app/globals.css`.
+*   **Font:** The "Unbounded" font is imported from Google Fonts and applied to the logo.
+
+## Current Request
+
+*   No active request.

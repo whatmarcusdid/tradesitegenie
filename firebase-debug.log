@@ -121,3 +121,245 @@
 [debug] [2025-09-15T16:09:39.737Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:692679763264:web:25bad17a7b382b7554c6a5/config [none]
 [debug] [2025-09-15T16:09:40.185Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:692679763264:web:25bad17a7b382b7554c6a5/config 200
 [debug] [2025-09-15T16:09:40.185Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:692679763264:web:25bad17a7b382b7554c6a5/config {"projectId":"tradesitegenie","appId":"1:692679763264:web:25bad17a7b382b7554c6a5","storageBucket":"tradesitegenie.firebasestorage.app","apiKey":"AIzaSyCvE-BO2puKDD6ZF0fz9IVCpMnLRqGD6n4","authDomain":"tradesitegenie.firebaseapp.com","messagingSenderId":"692679763264","measurementId":"G-FHP4F9D318"}
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T16:36:17.428Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-09-15T16:36:17.434Z] > authorizing via signed-in user (whitem0824@gmail.com)
+[info] 
+=== Firestore Setup Actuation
+[info] ✔  Wrote firestore.rules 
+[info] ✔  Wrote firestore.indexes.json 
+[info] ✔  Wrote configuration info to firebase.json 
+[info] ✔  Wrote project information to .firebaserc 
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T16:37:28.287Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-09-15T16:37:28.287Z] > authorizing via signed-in user (whitem0824@gmail.com)
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T16:37:28.315Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-09-15T16:37:28.315Z] > authorizing via signed-in user (whitem0824@gmail.com)
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T16:37:29.278Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.278Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.279Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:29.287Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:29.288Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.376Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.377Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.377Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:29.378Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:29.378Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.381Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.381Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.381Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:29.382Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:29.382Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.385Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.385Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.385Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:29.386Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:29.386Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.389Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.389Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.389Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:29.390Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:29.390Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.392Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.392Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.392Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:29.393Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:29.393Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.395Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.395Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.395Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:29.396Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:29.396Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.398Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.398Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.398Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:29.399Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:29.399Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.401Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.401Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:29.401Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:29.401Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:29.401Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.521Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:29.525Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.599Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/storage.googleapis.com [none]
+[debug] [2025-09-15T16:37:29.599Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/storage.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T16:37:29.602Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:29.602Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.613Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com [none]
+[debug] [2025-09-15T16:37:29.613Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T16:37:29.622Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:29.622Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.639Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com [none]
+[debug] [2025-09-15T16:37:29.639Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T16:37:29.670Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:29.670Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.687Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseremoteconfig.googleapis.com [none]
+[debug] [2025-09-15T16:37:29.687Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseremoteconfig.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T16:37:29.691Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:29.691Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.703Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/identitytoolkit.googleapis.com [none]
+[debug] [2025-09-15T16:37:29.703Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/identitytoolkit.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T16:37:29.708Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:29.708Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.727Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ [none]
+[debug] [2025-09-15T16:37:29.727Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T16:37:29.731Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:29.731Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.749Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2025-09-15T16:37:29.749Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T16:37:29.778Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:29.779Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.803Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/fcm.googleapis.com [none]
+[debug] [2025-09-15T16:37:29.803Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/fcm.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T16:37:29.829Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:29.830Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:29.850Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseapphosting.googleapis.com [none]
+[debug] [2025-09-15T16:37:29.850Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T16:37:29.871Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com 403
+[debug] [2025-09-15T16:37:29.873Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com [omitted]
+[debug] [2025-09-15T16:37:29.986Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com 200
+[debug] [2025-09-15T16:37:29.988Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2025-09-15T16:37:30.005Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/storage.googleapis.com 200
+[debug] [2025-09-15T16:37:30.005Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/storage.googleapis.com [omitted]
+[debug] [2025-09-15T16:37:30.064Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseremoteconfig.googleapis.com 200
+[debug] [2025-09-15T16:37:30.065Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseremoteconfig.googleapis.com [omitted]
+[debug] [2025-09-15T16:37:30.089Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/identitytoolkit.googleapis.com 200
+[debug] [2025-09-15T16:37:30.089Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/identitytoolkit.googleapis.com [omitted]
+[debug] [2025-09-15T16:37:30.143Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseapphosting.googleapis.com 200
+[debug] [2025-09-15T16:37:30.143Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2025-09-15T16:37:30.174Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/fcm.googleapis.com 200
+[debug] [2025-09-15T16:37:30.175Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/fcm.googleapis.com [omitted]
+[debug] [2025-09-15T16:37:30.293Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com 200
+[debug] [2025-09-15T16:37:30.293Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2025-09-15T16:37:30.331Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ 200
+[debug] [2025-09-15T16:37:30.331Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ [omitted]
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T16:37:30.336Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-09-15T16:37:30.337Z] > authorizing via signed-in user (whitem0824@gmail.com)
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T16:37:38.675Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-09-15T16:37:38.680Z] > authorizing via signed-in user (whitem0824@gmail.com)
+[debug] [2025-09-15T16:37:38.684Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:38.689Z] Checked if tokens are valid: false, expires at: 1757953900022
+[debug] [2025-09-15T16:37:38.690Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T16:37:38.698Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T16:37:38.699Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:38.793Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T16:37:38.794Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T16:37:38.822Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/tradesitegenie/webApps pageSize=100
+[debug] [2025-09-15T16:37:39.084Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/tradesitegenie/webApps 200
+[debug] [2025-09-15T16:37:39.089Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/tradesitegenie/webApps {"apps":[{"name":"projects/tradesitegenie/webApps/1:692679763264:web:25bad17a7b382b7554c6a5","appId":"1:692679763264:web:25bad17a7b382b7554c6a5","displayName":"TSG Dashboard","projectId":"tradesitegenie","webId":"ODI5MWJmYTItZDI2Mi00YjIzLWJiNDEtNTRlNTg2ZDdiNzM0","apiKeyId":"1d46d440-87d7-473f-bdd1-7f85b50b305e","state":"ACTIVE","expireTime":"1970-01-01T00:00:00Z","etag":"1_35228e18-736d-4050-bc46-0954fcf0797e"}]}
+[debug] [2025-09-15T16:37:39.090Z] Checked if tokens are valid: true, expires at: 1757957857794
+[debug] [2025-09-15T16:37:39.090Z] Checked if tokens are valid: true, expires at: 1757957857794
+[debug] [2025-09-15T16:37:39.090Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:692679763264:web:25bad17a7b382b7554c6a5/config [none]
+[debug] [2025-09-15T16:37:39.513Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:692679763264:web:25bad17a7b382b7554c6a5/config 200
+[debug] [2025-09-15T16:37:39.514Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:692679763264:web:25bad17a7b382b7554c6a5/config {"projectId":"tradesitegenie","appId":"1:692679763264:web:25bad17a7b382b7554c6a5","storageBucket":"tradesitegenie.firebasestorage.app","apiKey":"AIzaSyCvE-BO2puKDD6ZF0fz9IVCpMnLRqGD6n4","authDomain":"tradesitegenie.firebaseapp.com","messagingSenderId":"692679763264","measurementId":"G-FHP4F9D318"}
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T17:47:24.288Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.289Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.290Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T17:47:24.293Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T17:47:24.294Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.364Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.365Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.365Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T17:47:24.366Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T17:47:24.367Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.373Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.374Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.374Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T17:47:24.375Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T17:47:24.376Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.384Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.385Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.386Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T17:47:24.387Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T17:47:24.389Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T17:47:24.479Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.485Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.485Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T17:47:24.486Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T17:47:24.486Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.492Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.493Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.493Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T17:47:24.493Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T17:47:24.493Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.496Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.496Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.496Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T17:47:24.497Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T17:47:24.497Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.499Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.499Z] Checked if tokens are valid: false, expires at: 1757957857794
+[debug] [2025-09-15T17:47:24.500Z] > refreshing access token with scopes: []
+[debug] [2025-09-15T17:47:24.500Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-15T17:47:24.500Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.567Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T17:47:24.567Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.589Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2025-09-15T17:47:24.590Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T17:47:24.612Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T17:47:24.612Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.633Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ [none]
+[debug] [2025-09-15T17:47:24.634Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T17:47:24.654Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T17:47:24.657Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.674Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ [none]
+[debug] [2025-09-15T17:47:24.675Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T17:47:24.686Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T17:47:24.688Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.702Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com [none]
+[debug] [2025-09-15T17:47:24.702Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T17:47:24.706Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T17:47:24.709Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.729Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com [none]
+[debug] [2025-09-15T17:47:24.729Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T17:47:24.761Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T17:47:24.761Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.780Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2025-09-15T17:47:24.780Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T17:47:24.783Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T17:47:24.783Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.795Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com [none]
+[debug] [2025-09-15T17:47:24.796Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T17:47:24.834Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-09-15T17:47:24.834Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-15T17:47:24.852Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com [none]
+[debug] [2025-09-15T17:47:24.852Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com x-goog-quota-user=projects/tradesitegenie
+[debug] [2025-09-15T17:47:24.950Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com 200
+[debug] [2025-09-15T17:47:24.950Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2025-09-15T17:47:24.960Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com 403
+[debug] [2025-09-15T17:47:24.960Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com [omitted]
+[debug] [2025-09-15T17:47:25.017Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com 403
+[debug] [2025-09-15T17:47:25.017Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebaseio.com [omitted]
+[debug] [2025-09-15T17:47:25.267Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ 200
+[debug] [2025-09-15T17:47:25.268Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ [omitted]
+[debug] [2025-09-15T17:47:25.315Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com 200
+[debug] [2025-09-15T17:47:25.316Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2025-09-15T17:47:25.337Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com 200
+[debug] [2025-09-15T17:47:25.337Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2025-09-15T17:47:25.376Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com 200
+[debug] [2025-09-15T17:47:25.376Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/firebasecrashlytics.googleapis.com [omitted]
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T17:47:25.397Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-09-15T17:47:25.398Z] > authorizing via signed-in user (whitem0824@gmail.com)
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-09-15T17:47:25.423Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-09-15T17:47:25.423Z] > authorizing via signed-in user (whitem0824@gmail.com)
+[debug] [2025-09-15T17:47:25.440Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ 200
+[debug] [2025-09-15T17:47:25.440Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/tradesitegenie/services/ [omitted]
