@@ -10,7 +10,7 @@ import {
   GoogleAuthProvider,
   OAuthProvider,
 } from 'firebase/auth';
-import { auth } from '@/lib/firebaseConfig';
+import { getBrowserAuth } from '@/lib/firebaseConfig';
 import styles from './SignInPage.module.css';
 
 const SignInPage = () => {
@@ -24,7 +24,7 @@ const SignInPage = () => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-
+    const auth = getBrowserAuth();
     if (!auth) {
       setError('Firebase auth is not initialized.');
       setLoading(false);
@@ -50,6 +50,7 @@ const SignInPage = () => {
   };
 
   const handleGoogleSignIn = async () => {
+    const auth = getBrowserAuth();
     if (!auth) {
       setError('Firebase auth is not initialized.');
       return;
@@ -64,6 +65,7 @@ const SignInPage = () => {
   };
 
   const handleAppleSignIn = async () => {
+    const auth = getBrowserAuth();
     if (!auth) {
       setError('Firebase auth is not initialized.');
       return;
