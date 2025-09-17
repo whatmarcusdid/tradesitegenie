@@ -7,21 +7,20 @@ import { auth } from '@/lib/firebaseConfig';
 
 const ResetPasswordPage = () => {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [emailSent, setEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage(null);
     setError(null);
     setLoading(true);
 
     try {
       await sendPasswordResetEmail(auth, email);
-      setMessage('Password reset email sent. Please check your inbox.');
+      setEmailSent(true);
     } catch (error: unknown) {
-      let errorMessage = 'Failed to send password reset email.';
+      let errorMessage = 'Failed to send password reset email. Please try again.';
       const firebaseError = error as { code: string };
       if (firebaseError.code === 'auth/user-not-found') {
         errorMessage = 'No user found with this email address.';
@@ -33,20 +32,24 @@ const ResetPasswordPage = () => {
   };
 
   return (
-    <div className="bg-[#F7F7F7] min-h-screen flex flex-col">
-      <header className="py-4 px-6">
-        <Link href="/" passHref>
-          <span className="text-2xl font-bold tracking-tight cursor-pointer">TradeSiteGenie</span>
+    <div className="signin-page-container">
+      <header className="signin-header">
+        <Link href="/" className="logo-text">
+          TradeSiteGenie
         </Link>
       </header>
-      <main className="flex-grow flex items-center justify-center">
-        <div className="w-full max-w-md mx-auto p-6">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold">Reset Your Password</h1>
-          </div>
-          <form onSubmit={handleResetPassword} className="space-y-4">
+      <main className="signin-main">
+        <div className="signin-title-container">
+          <h1 className="signin-title">Reset Your Password</h1>
+        </div>
+        {emailSent ? (
+          <p className="success-message">
+            A password reset link has been sent to your email address. Please check your inbox.
+          </p>
+        ) : (
+          <form onSubmit={handleResetPassword} className="signin-form">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="form-label">
                 Email
               </label>
               <input
@@ -54,31 +57,27 @@ const ResetPasswordPage = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300"
+                className="form-input"
                 placeholder="Enter your email"
                 required
               />
             </div>
-            {message && <p className="text-green-600 text-sm text-center">{message}</p>}
-            {error && <p className="text-red-600 text-sm text-center">{error}</p>}
+            {error && <p className="error-message">{error}</p>}
             <button
               type="submit"
-              className="w-full bg-[#C4F03F] text-black font-semibold py-3 px-4 rounded-md hover:bg-lime-400 transition-colors disabled:opacity-50"
+              className="primary-button"
               disabled={loading}
             >
               {loading ? 'Sending...' : 'Send Password Reset Email'}
             </button>
           </form>
+        )}
+        <div className="signin-footer">
+          <Link href="/" className="back-to-signin-link">
+            Back to Sign In
+          </Link>
         </div>
       </main>
-      <footer className="text-center py-6">
-        <p className="text-sm text-gray-600">
-          Remembered your password?{' '}
-          <Link href="/signin">
-            <span className="font-semibold text-gray-800 hover:underline cursor-pointer">Sign In</span>
-          </Link>
-        </p>
-      </footer>
     </div>
   );
 };
