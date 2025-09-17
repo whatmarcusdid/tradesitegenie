@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { getBrowserAuth } from '@/lib/firebaseConfig'; // Corrected import
+import { getBrowserAuth } from '@/lib/firebaseConfig';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +17,7 @@ const SignUpPage = () => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const auth = getBrowserAuth(); // Correctly get auth instance
+    const auth = getBrowserAuth();
     if (!auth) {
       setError("Authentication service is not available.");
       setLoading(false);
@@ -42,7 +42,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="signin-page-container"> // Note: Reusing styles for consistency
+    <div className="signin-page-container">
       <header className="signin-header">
         <Link href="/" className="logo-text">TradeSiteGenie</Link>
       </header>
