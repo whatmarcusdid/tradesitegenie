@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
-import { auth } from '@/lib/firebaseConfig';
+import { getBrowserAuth } from '@/lib/firebaseConfig'; // Corrected import
 
 const DashboardPage = () => {
   const router = useRouter();
@@ -11,21 +11,30 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const auth = getBrowserAuth(); // Correctly get auth instance
+    if (!auth) {
+        router.replace('/signin');
+        return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
       } else {
-        // If no user is signed in, redirect to the sign-in page
         router.replace('/signin');
       }
       setLoading(false);
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, [router]);
 
   const handleSignOut = async () => {
+    const auth = getBrowserAuth(); // Correctly get auth instance
+    if (!auth) {
+        console.error('Firebase auth is not initialized.');
+        return;
+    }
     try {
       await signOut(auth);
       router.replace('/signin');

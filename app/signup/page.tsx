@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/lib/firebaseConfig';
+import { getBrowserAuth } from '@/lib/firebaseConfig'; // Corrected import
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -17,6 +17,12 @@ const SignUpPage = () => {
     e.preventDefault();
     setError(null);
     setLoading(true);
+    const auth = getBrowserAuth(); // Correctly get auth instance
+    if (!auth) {
+      setError("Authentication service is not available.");
+      setLoading(false);
+      return;
+    }
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
@@ -27,7 +33,7 @@ const SignUpPage = () => {
       if (firebaseError.code === 'auth/email-already-in-use') {
         errorMessage = 'This email is already in use.';
       } else if (firebaseError.code === 'auth/weak-password') {
-        errorMessage = 'The password is too weak.';
+        errorMessage = 'The password is too weak. It should be at least 6 characters long.';
       }
       setError(errorMessage);
     } finally {
@@ -36,7 +42,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="signin-page-container">
+    <div className="signin-page-container"> // Note: Reusing styles for consistency
       <header className="signin-header">
         <Link href="/" className="logo-text">TradeSiteGenie</Link>
       </header>
@@ -69,7 +75,7 @@ const SignUpPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="form-input"
-              placeholder="Create a password"
+              placeholder="Create a password (min. 6 characters)"
               required
             />
           </div>
@@ -84,7 +90,7 @@ const SignUpPage = () => {
         </form>
         <p className="text-sm text-gray-600">
           Already have an account?{' '}
-          <Link href="/signin">
+          <Link href="/" className='text-blue-500 hover:underline'>
             Sign In
           </Link>
         </p>

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '@/lib/firebaseConfig';
+import { getBrowserAuth } from '@/lib/firebaseConfig'; // Corrected import
 
 const ResetPasswordPage = () => {
   const [email, setEmail] = useState('');
@@ -15,6 +15,12 @@ const ResetPasswordPage = () => {
     e.preventDefault();
     setError(null);
     setLoading(true);
+    const auth = getBrowserAuth(); // Correctly get auth instance
+    if (!auth) {
+      setError("Authentication service is not available.");
+      setLoading(false);
+      return;
+    }
 
     try {
       await sendPasswordResetEmail(auth, email);
