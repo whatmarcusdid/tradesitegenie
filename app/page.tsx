@@ -82,8 +82,7 @@ const SignInPage = () => {
       <div className={styles.leftPanel}>
         <h1 className={styles.welcomeTitle}>Welcome to TradeSiteGenie</h1>
         <p className={styles.welcomeMessage}>
-          Your all-in-one solution for creating stunning trade websites with ease.
-          Sign in to unlock the power of AI-driven web design.
+        Your all-in-one solution for creating stunning trade websites with ease. Don&apos;t worry — it&apos;s simple.
         </p>
       </div>
       <div className={styles.rightPanel}>
@@ -154,7 +153,7 @@ const SignInPage = () => {
           </div>
           <div className={styles.footer}>
             <p>
-              Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
               <Link href="/signup" className={styles.signupLink}>
                 Sign up
               </Link>
