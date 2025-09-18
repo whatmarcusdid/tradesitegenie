@@ -1,0 +1,3 @@
+# Firebase Functions environmental variables
+.env
+.env.*.local

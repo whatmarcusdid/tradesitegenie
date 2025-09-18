@@ -2,6 +2,7 @@
 
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth, type Auth } from 'firebase/auth';
+import { getDatabase, type Database } from 'firebase/database';
 import { getFunctions, connectFunctionsEmulator, Functions } from 'firebase/functions';
 import { getAnalytics, Analytics } from "firebase/analytics";
 
@@ -33,6 +34,12 @@ export function getBrowserAuth(): Auth | null {
   return getAuth(app);
 }
 
+// Database
+export function getBrowserDatabase(): Database | null {
+  if (typeof window === 'undefined') return null;
+  return getDatabase(app);
+}
+
 // Functions
 let functionsInstance: Functions | null = null;
 export function getFunctionsInstance(): Functions {
@@ -46,13 +53,8 @@ export function getFunctionsInstance(): Functions {
 }
 
 // Analytics
-let analyticsInstance: Analytics | null = null;
 export function getAnalyticsInstance(): Analytics | null {
-    if (typeof window !== 'undefined') {
-        if (!analyticsInstance) {
-            analyticsInstance = getAnalytics(app);
-        }
-        return analyticsInstance;
-    }
-    return null;
+    if (typeof window === 'undefined') return null;
+    if (!app) return null;
+    return getAnalytics(app);
 }

@@ -1,0 +1,197 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.leftPanel {
+  flex: 1;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: white;
+  text-align: center;
+}
+
+.welcomeTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.welcomeMessage {
+  font-size: 1.25rem;
+  max-width: 400px;
+}
+
+.rightPanel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f8fc;
+  padding: 40px;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #6e8efb;
+}
+
+.forgotPassword {
+  display: block;
+  text-align: right;
+  font-size: 0.875rem;
+  color: #6e8efb;
+  text-decoration: none;
+  margin-top: 8px;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.button {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  border: none;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  margin-top: 10px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.divider {
+  text-align: center;
+  color: #aaa;
+  margin: 25px 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #ddd;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.oauthContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.oauthButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.oauthButton:hover {
+  background-color: #f9f9f9;
+}
+
+.oauthIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.signupLink {
+  color: #6e8efb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}

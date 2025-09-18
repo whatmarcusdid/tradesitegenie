@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getBlogPost, getPageContent } from '@/lib/notion';
 import { Post } from '@/lib/types';
-import { BlockObjectResponse, PartialBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import { BlockObjectResponse, PartialBlockObjectResponse } from 'notionhq/client/build/src/api-endpoints';
 
 const renderBlock = (block: BlockObjectResponse | PartialBlockObjectResponse) => {
   // Partial blocks don't have a 'type'. We can safely ignore them.
@@ -42,7 +42,8 @@ interface PageProps {
 }
 
 const BlogPostPage = async ({ params }: PageProps) => {
-  const { id } = await params;
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
   const post = (await getBlogPost(id)) as unknown as Post;
   const pageContent = await getPageContent(id);
 

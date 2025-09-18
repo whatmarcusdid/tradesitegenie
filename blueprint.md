@@ -2,50 +2,72 @@
 
 ## Overview
 
-This project is a Next.js application with Firebase integration for authentication, a Notion-powered blog, and a robust Stripe-powered subscription system. It provides a sign-in page, a blog that pulls content from Notion, and a complete payment and subscription management solution.
+This project is a Next.js application integrated with Firebase, named "TradeSiteGenie." It has been migrated from a multi-tenant system to a direct user/admin system, simplifying the architecture and data model.
 
-## Styling and Design
+## Features & Design
 
-- **CSS Modules:** The sign-in page and blog components use CSS Modules for styling, improving modularity and preventing style conflicts.
-- **Modern UI:** The application features a modern, clean, and user-friendly interface.
-- **Responsive Design:** The application is designed to be responsive and work on different screen sizes.
+### Implemented Features:
 
-## Features
+*   **Firebase Integration:** The project is configured to use a suite of Firebase services:
+    *   Firebase Authentication
+    *   Firebase Realtime Database
+    *   Firebase Functions
+    *   Firebase Analytics
+*   **Simplified Database Structure:** The database now uses a direct user-to-data model:
+    *   `/users/{userId}`
+    *   `/admins/{adminId}`
+    *   `/subscriptions/{subscriptionId}`
+    *   `/maintenance_tickets/{ticketId}`
+*   **Database Functions:** The `lib/database.ts` file contains functions for all database interactions:
+    *   `createUser`, `getUserData`
+    *   `createSubscription`, `getUserSubscription`
+    *   `createMaintenanceTicket`, `getUserTickets`
+    *   `isAdmin` for permission checking
+*   **Type Safety:** A `lib/types.ts` file defines the data structures for `UserData`, `Subscription`, and `MaintenanceTicket`.
 
-- **Email/Password Authentication:** Users can sign in with their email and password.
-- **Google Sign-In:** Users can sign in with their Google account.
-- **Apple Sign-In:** Users can sign in with their Apple account.
-- **Password Reset:** A link is provided for users to reset their password.
-- **Sign-Up Link:** A link to the sign-up page has been added for new users.
-- **Footer:** A professional footer with copyright information has been added.
-- **Notion-Powered Blog:** The application features a blog that dynamically fetches and displays content from a Notion database.
-    - **Blog Listing Page:** Displays a list of all blog posts with their titles, summaries, and cover images.
-    - **Individual Blog Post Pages:** Dynamically generates pages for each blog post, displaying the full content, including text, headings, and images.
-- **Stripe Subscription Integration:** A complete subscription and payment system powered by Stripe.
-    - **Checkout Page:** A dedicated checkout page where users can review their order and enter their payment information.
-    - **Stripe Checkout Redirect:** The application redirects users to a secure, Stripe-hosted checkout page to complete their purchase.
-    - **Cloud Functions for Stripe:**
-        - **`createStripeCheckoutSession`:** A secure Cloud Function that creates a Stripe Checkout Session. It also creates a Stripe Customer for new users and links it to their Firebase account.
-        - **`stripeWebhook`:** A Cloud Function that handles webhooks from Stripe to keep the Firestore database in sync with Stripe. It listens for events like `checkout.session.completed` and `invoice.payment_succeeded` to manage subscription statuses.
-        - **`createFirebaseUser`:** A Cloud Function that automatically creates a user document in Firestore when a new Firebase user is created.
-- **Cloud Functions:**
-    - **Notion Webhook (`notionBlogWebhook`):** A Cloud Function that serves as a webhook to receive updates from a Notion database. When the Notion database is updated, this function is triggered, and the new blog data is added to a "blogPosts" collection in Firestore. This allows for automatic content updates on the blog.
+### Authentication & Onboarding Flow
 
-## File Structure
+The authentication and new user onboarding process is designed to be secure, intuitive, and to seamlessly guide users toward becoming subscribers.
 
-- `app/layout.tsx`: The root layout of the application.
-- `app/page.tsx`: The landing/sign-in page of the application.
-- `app/SignInPage.module.css`: The CSS module for the sign-in page.
-- `app/blog/page.tsx`: The main blog page that lists all blog posts.
-- `app/blog/blog.module.css`: The CSS module for the blog page.
-- `app/blog/[id]/page.tsx`: The dynamic page for individual blog posts.
-- `app/blog/[id]/post.module.css`: The CSS module for individual blog post pages.
-- `app/checkout/page.tsx`: The checkout page.
-- `app/checkout/CheckoutPage.module.css`: The CSS module for the checkout page.
-- `lib/firebaseConfig.ts`: The Firebase configuration file, including Functions SDK.
-- `lib/notion.ts`: A module to handle all communication with the Notion API.
-- `styles/globals.css`: The global stylesheet for the application.
-- `.env.local`: A file to store environment variables, including Notion API secret and Stripe keys.
-- `apphosting.yaml`: The configuration file for Firebase App Hosting, including environment variables for deployment.
-- `functions/index.js`: The main file for Cloud Functions, containing the `notionBlogWebhook`, `createStripeCheckoutSession`, `stripeWebhook`, and `createFirebaseUser` functions.
-- `functions/package.json`: The package.json file for the Cloud Functions, defining dependencies (including Stripe) and the Node.js runtime.
+*   **Centralized Sign-In:** The `app/signin/page.tsx` page is the single entry point for all users.
+*   **Profile Completion:** Redirects to `app/auth/complete-signup/page.tsx` for users without a database record.
+*   **Dedicated Sign-Up & Subscription Onboarding:** A clear path from sign-up to subscription.
+*   **Password Reset:** A self-service password reset page.
+*   **Checkout & Subscription Management:** Securely handles subscription payments and management using Stripe.
+*   **Protected Routes:** Ensures only authenticated users can access sensitive pages.
+
+### Client-Exclusive Dashboard
+
+*   **Client-Only Access:** The dashboard is now exclusively for users with `userType: 'user'`. Admins attempting to access `/dashboard` are automatically redirected to `/admin`.
+*   **Component-Based Architecture:** The dashboard is built with a modular and maintainable structure, using separate components for each client-focused feature:
+    *   `WelcomeCard.tsx`: Displays a personalized welcome message and user details.
+    *   `SubscriptionCard.tsx`: Shows current subscription plan details.
+    *   `HoursCounterCard.tsx`: Displays remaining maintenance and support hours.
+    *   `AnalyticsCard.tsx`: Shows site traffic analytics (or "N/A" if unavailable).
+    *   `ScheduleSessionCard.tsx`: A call-to-action for scheduling a welcome session.
+    *   `SupportTicketsCard.tsx`: A detailed list of the user's personal support tickets.
+    *   `ReportsCard.tsx`: Provides links to download monthly reports.
+    *   `BlogCard.tsx`: Displays recent blog articles to keep clients engaged.
+*   **Modern Styling:** The dashboard is styled with `Dashboard.module.css` to provide a clean, professional, and mobile-friendly design, featuring a responsive grid layout and modern card-based components.
+
+## Current Task: Build the Client-Exclusive Dashboard
+
+**Plan:**
+
+1.  **Create Client-Specific Components:**
+    *   `HoursCounterCard.tsx`
+    *   `AnalyticsCard.tsx`
+    *   `ScheduleSessionCard.tsx`
+    *   `SupportTicketsCard.tsx`
+    *   `ReportsCard.tsx`
+    *   `BlogCard.tsx`
+
+2.  **Update Styles:**
+    *   Add new styles for the components to `app/dashboard/Dashboard.module.css` to ensure a cohesive and modern design.
+
+3.  **Refactor Dashboard Page:**
+    *   Modify `app/dashboard/page.tsx` to enforce client-only access by redirecting admins.
+    *   Integrate all the new client-focused components into a responsive grid layout.
+
+4.  **Update Blueprint:**
+    *   Document the new client dashboard features in `blueprint.md`.

@@ -3,98 +3,90 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getBrowserAuth } from '@/lib/firebaseConfig';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUser } from '@/lib/database';
+import styles from '../../../SignInPage.module.css';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const auth = getBrowserAuth();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
-    const auth = getBrowserAuth();
+
     if (!auth) {
-      setError("Authentication service is not available.");
-      setLoading(false);
+      setError('Firebase Auth is not available.');
       return;
     }
 
+    if (password.length < 6) {
+        setError("Password must be at least 6 characters long.");
+        return;
+    }
+
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      router.replace('/dashboard');
-    } catch (error: unknown) {
-      let errorMessage = 'Failed to sign up. Please try again.';
-      const firebaseError = error as { code: string };
-      if (firebaseError.code === 'auth/email-already-in-use') {
-        errorMessage = 'This email is already in use.';
-      } else if (firebaseError.code === 'auth/weak-password') {
-        errorMessage = 'The password is too weak. It should be at least 6 characters long.';
+      // 1. Create user in Firebase Auth
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Update the user's profile with their name
+      await updateProfile(user, { displayName: name });
+
+      // 2. Create user record in Realtime Database
+      const dbResult = await createUser(user.uid, email, name);
+
+      if (dbResult.success) {
+        // 3. Redirect to checkout for subscription setup
+        router.push('/checkout');
+      } else {
+        setError(dbResult.error?.toString() || 'Failed to create user database record.');
       }
-      setError(errorMessage);
-    } finally {
-      setLoading(false);
+    } catch (error: any) {
+      // Handle errors from Firebase Auth or database creation
+      setError(error.message);
     }
   };
 
   return (
-    <div className="signin-page-container">
-      <header className="signin-header">
-        <Link href="/" className="logo-text">TradeSiteGenie</Link>
-      </header>
-      <main className="signin-main">
-        <div className="signin-title-container">
-          <h1 className="signin-title">Create Your Account</h1>
-        </div>
-        <form onSubmit={handleSignUp} className="signin-form">
-          <div>
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="form-input"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="form-input"
-              placeholder="Create a password (min. 6 characters)"
-              required
-            />
-          </div>
-          {error && <p className="error-message">{error}</p>}
-          <button
-            type="submit"
-            className="primary-button"
-            disabled={loading}
-          >
-            {loading ? 'Creating Account...' : 'Sign Up'}
-          </button>
-        </form>
-        <p className="text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link href="/" className='text-blue-500 hover:underline'>
-            Sign In
-          </Link>
-        </p>
-      </main>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Create an Account</h1>
+      <form onSubmit={handleSignUp} className={styles.form}>
+      <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className={styles.input}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={styles.input}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password (min. 6 characters)"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={styles.input}
+          required
+        />
+        <button type="submit" className={styles.button}>Sign Up & Proceed to Checkout</button>
+        {error && <p className={styles.error}>{error}</p>}
+      </form>
+      <p className={styles.link}>
+        Already have an account? <Link href="/signin">Sign In</Link>
+      </p>
     </div>
   );
 };

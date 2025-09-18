@@ -1,41 +1,60 @@
 'use client';
 
-import { onAuthStateChanged } from 'firebase/auth';
-import { getBrowserAuth } from '@/lib/firebaseConfig';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { getBrowserAuth } from '@/lib/firebaseConfig';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { isAdmin } from '@/lib/database';
 
-export default function Protected({ children }: { children: React.ReactNode }) {
-  const [isReady, setIsReady] = useState(false);
+interface ProtectedProps {
+  children: React.ReactNode;
+  adminOnly?: boolean;
+}
+
+const Protected = ({ children, adminOnly = false }: ProtectedProps) => {
   const router = useRouter();
+  const auth = getBrowserAuth();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    const auth = getBrowserAuth();
     if (!auth) {
-      // If auth service is not available, redirect to sign-in.
-      // This can happen during SSR or if initialization fails.
-      router.replace('/signin');
+      router.push('/signin');
       return;
     }
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setIsReady(true);
+        setUser(user);
+        if (adminOnly) {
+          const userIsAdmin = await isAdmin(user.uid);
+          if (userIsAdmin) {
+            setAuthorized(true);
+          } else {
+            router.push('/dashboard'); // Or a dedicated 'unauthorized' page
+          }
+        } else {
+          setAuthorized(true);
+        }
       } else {
-        // No user is signed in, redirect to the sign-in page.
-        router.replace('/signin');
+        router.push('/signin');
       }
+      setLoading(false);
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [router]);
+  }, [auth, router, adminOnly]);
 
-  // While checking the auth state, show a loading indicator.
-  if (!isReady) {
-    return <div className="flex items-center justify-center min-h-screen"><p>Loading...</p></div>;
+  if (loading) {
+    return <div>Loading...</div>; // Or a proper loading spinner
   }
 
-  // If ready (and authenticated), render the children.
+  if (!authorized) {
+    return null; // Or a redirect component
+  }
+
   return <>{children}</>;
-}
+};
+
+export default Protected;

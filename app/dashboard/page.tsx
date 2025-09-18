@@ -1,73 +1,81 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { onAuthStateChanged, signOut, User } from 'firebase/auth';
-import { getBrowserAuth } from '@/lib/firebaseConfig'; // Corrected import
+import { getBrowserAuth } from '@/lib/firebaseConfig';
+import { User } from 'firebase/auth';
+import { getUserData, getUserSubscription, getUserTickets } from '@/lib/database';
+import { UserData, Subscription, MaintenanceTicket } from '@/lib/types';
+import styles from './Dashboard.module.css';
+import WelcomeCard from './components/WelcomeCard';
+import SubscriptionCard from './components/SubscriptionCard';
+import HoursCounterCard from './components/HoursCounterCard';
+import AnalyticsCard from './components/AnalyticsCard';
+import ScheduleSessionCard from './components/ScheduleSessionCard';
+import SupportTicketsCard from './components/SupportTicketsCard';
+import ReportsCard from './components/ReportsCard';
+import BlogCard from './components/BlogCard';
 
 const DashboardPage = () => {
   const router = useRouter();
+  const auth = getBrowserAuth();
   const [user, setUser] = useState<User | null>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [tickets, setTickets] = useState<MaintenanceTicket[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const auth = getBrowserAuth(); // Correctly get auth instance
-    if (!auth) {
-        router.replace('/signin');
-        return;
-    }
+  // Placeholder data
+  const maintenanceHours = 10;
+  const supportHours = 5;
+  const siteTraffic = null; // or a number
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+  useEffect(() => {
+    if (!auth) return;
+
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
+        const userData = await getUserData(user.uid);
+        if (userData && userData.userType === 'admin') {
+          router.push('/admin'); // Redirect admins
+          return;
+        }
+
         setUser(user);
+        setUserData(userData);
+
+        const [userSubscription, userTickets] = await Promise.all([
+          getUserSubscription(user.uid),
+          getUserTickets(user.uid),
+        ]);
+        setSubscription(userSubscription);
+        setTickets(userTickets);
       } else {
-        router.replace('/signin');
+        router.push('/signin');
       }
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, [router]);
-
-  const handleSignOut = async () => {
-    const auth = getBrowserAuth(); // Correctly get auth instance
-    if (!auth) {
-        console.error('Firebase auth is not initialized.');
-        return;
-    }
-    try {
-      await signOut(auth);
-      router.replace('/signin');
-    } catch (error) {
-      console.error('Failed to sign out:', error);
-    }
-  };
+  }, [auth, router]);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p>Loading...</p>
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
-    <div className="bg-[#F7F7F7] min-h-screen flex flex-col">
-      <header className="py-4 px-6 flex justify-between items-center bg-white shadow-md">
-        <h1 className="text-2xl font-bold tracking-tight">TradeSiteGenie Dashboard</h1>
-        <button
-          onClick={handleSignOut}
-          className="bg-red-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-red-600 transition-colors"
-        >
-          Sign Out
-        </button>
-      </header>
-      <main className="flex-grow p-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold mb-4">Welcome to Your Dashboard</h2>
-          {user && <p className="text-lg">You are signed in as {user.email}</p>}
-        </div>
-      </main>
+    <div className={styles.container}>
+      {userData && <h1 className={styles.title}>Welcome, {userData.name}!</h1>}
+      <div className={styles.grid}>
+        {user && userData && <WelcomeCard user={user} userData={userData} />}
+        {subscription && <SubscriptionCard subscription={subscription} />}
+        <HoursCounterCard maintenanceHours={maintenanceHours} supportHours={supportHours} />
+        <AnalyticsCard siteTraffic={siteTraffic} />
+        <ScheduleSessionCard />
+        <ReportsCard />
+        <SupportTicketsCard tickets={tickets} />
+        <BlogCard />
+      </div>
     </div>
   );
 };

@@ -1,136 +1,97 @@
-const functions = require("firebase-functions");
+const { setGlobalOptions } = require("firebase-functions/v2");
+const { onCall, HttpsError } = require("firebase-functions/v2/https");
+const { onRequest } = require("firebase-functions/v2/https");
+const { defineString } = require('firebase-functions/params');
 const admin = require("firebase-admin");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 admin.initializeApp();
+setGlobalOptions({ region: "us-central1" });
 
-// Create a new user in Firestore when a user signs up
-exports.createFirebaseUser = functions.auth.user().onCreate(async (user) => {
-  const { uid, email } = user;
-  await admin.firestore().collection("users").doc(uid).set({
-    email: email,
-  });
-  return;
-});
+// Define secrets as per Firebase recommendations for v2
+const stripeSecretKey = defineString('STRIPE_SECRET_KEY');
+const stripeWebhookSecret = defineString('STRIPE_WEBHOOK_SECRET');
 
-exports.notionBlogWebhook = functions.https.onRequest(async (req, res) => {
-  const blogData = req.body;
-  await admin.firestore().collection("blogPosts").add(blogData);
-  res.status(200).send("Blog post received!");
-});
+exports.createStripeCheckout = onCall(async (request) => {
+    // Initialize stripe inside the function to ensure secrets are loaded
+    const stripe = require("stripe")(stripeSecretKey.value());
 
-exports.createStripeCheckoutSession = functions.https.onCall(async (data, context) => {
-  if (!context.auth) {
-    throw new functions.https.HttpsError(
-      "unauthenticated",
-      "You must be logged in to create a checkout session."
-    );
-  }
+    if (!request.auth) {
+        throw new HttpsError('unauthenticated', 'You must be logged in to make a purchase.');
+    }
 
-  const { planId, successUrl, cancelUrl } = data;
-  const uid = context.auth.uid;
+    const { priceId, successUrl, cancelUrl } = request.data;
+    const userId = request.auth.uid;
+    const user = await admin.auth().getUser(userId);
 
-  try {
-    const userDoc = await admin.firestore().collection("users").doc(uid).get();
-    let customerId = userDoc.data()?.stripeCustomerId;
+    let customerId = user.customClaims && user.customClaims.stripeCustomerId;
 
     if (!customerId) {
-      const customer = await stripe.customers.create({
-        email: context.auth.token.email,
-        metadata: {
-          firebaseUID: uid,
-        },
-      });
-      customerId = customer.id;
-      await admin.firestore().collection("users").doc(uid).update({
-        stripeCustomerId: customerId,
-      });
+        const customer = await stripe.customers.create({
+            email: user.email,
+            metadata: { userId }
+        });
+        customerId = customer.id;
+        await admin.auth().setCustomUserClaims(userId, { stripeCustomerId: customerId });
     }
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "subscription",
-      customer: customerId,
-      line_items: [
-        {
-          price: planId,
-          quantity: 1,
+        payment_method_types: ['card'],
+        mode: 'subscription',
+        customer: customerId,
+        line_items: [
+            {
+                price: priceId,
+                quantity: 1,
+            },
+        ],
+        expand: ['line_items'], // Ensure line_items are expanded in the webhook event
+        metadata: {
+            userId: userId
         },
-      ],
-      success_url: successUrl,
-      cancel_url: cancelUrl,
+        success_url: successUrl,
+        cancel_url: cancelUrl,
     });
 
-    return { id: session.id };
-  } catch (error) {
-    console.error("Error creating Stripe checkout session:", error);
-    throw new functions.https.HttpsError(
-      "internal",
-      "An error occurred while creating the checkout session."
-    );
-  }
+    return { sessionId: session.id };
 });
 
-exports.stripeWebhook = functions.https.onRequest(async (req, res) => {
-  const signature = req.headers["stripe-signature"];
-  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+exports.stripeWebhook = onRequest(async (req, res) => {
+    // Initialize stripe inside the function to ensure secrets are loaded
+    const stripe = require("stripe")(stripeSecretKey.value());
 
-  let event;
+    const signature = req.headers['stripe-signature'];
 
-  try {
-    event = stripe.webhooks.constructEvent(req.rawBody, signature, endpointSecret);
-  } catch (err) {
-    console.error("Webhook signature verification failed.", err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
+    let event;
 
-  switch (event.type) {
-    case 'checkout.session.completed':
-      const session = event.data.object;
-      const customerId = session.customer;
-      const subscriptionId = session.subscription;
-      const firebaseUID = (await stripe.customers.retrieve(customerId)).metadata.firebaseUID;
+    try {
+        event = stripe.webhooks.constructEvent(req.rawBody, signature, stripeWebhookSecret.value());
+    } catch (err) {
+        console.error('Webhook signature verification failed.', err.message);
+        res.status(400).send(`Webhook Error: ${err.message}`);
+        return;
+    }
 
-      const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        const userId = session.metadata.userId;
+        const stripeSubscriptionId = session.subscription;
+        const stripeCustomerId = session.customer;
+        const plan = session.line_items.data[0].price.id;
 
-      await admin.firestore().collection('users').doc(firebaseUID).collection('subscriptions').doc(subscriptionId).set({
-        plan: subscription.items.data[0].plan.id,
-        status: subscription.status,
-        current_period_start: subscription.current_period_start,
-        current_period_end: subscription.current_period_end,
-        cancel_at_period_end: subscription.cancel_at_period_end,
-      });
+        const subscriptionRef = admin.database().ref('subscriptions').push();
+        const subscriptionId = subscriptionRef.key;
 
-      await admin.firestore().collection('users').doc(firebaseUID).update({
-        stripeCustomerId: customerId,
-      });
-
-      console.log(`Successfully synced subscription ${subscriptionId} for user ${firebaseUID}`);
-      break;
-
-    case 'invoice.payment_succeeded':
-      const invoice = event.data.object;
-      const subId = invoice.subscription;
-      const sub = await stripe.subscriptions.retrieve(subId);
-      const fbUID = (await stripe.customers.retrieve(sub.customer)).metadata.firebaseUID;
-
-      await admin.firestore()
-        .collection('users')
-        .doc(fbUID)
-        .collection('subscriptions')
-        .doc(subId)
-        .update({
-          status: sub.status,
-          current_period_start: sub.current_period_start,
-          current_period_end: sub.current_period_end,
-          cancel_at_period_end: sub.cancel_at_period_end,
+        await subscriptionRef.set({
+            userId,
+            plan,
+            status: 'active',
+            stripeCustomerId,
+            stripeSubscriptionId,
+            createdAt: admin.database.ServerValue.TIMESTAMP
         });
-      console.log(`Updated subscription ${subId} for user ${fbUID}`);
-      break;
 
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-  }
+        await admin.database().ref(`users/${userId}/subscriptionId`).set(subscriptionId);
+    }
 
-  res.status(200).send();
+    res.status(200).send();
 });
