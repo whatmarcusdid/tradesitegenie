@@ -5,7 +5,7 @@
   channel = "stable-24.05"; # or "unstable"
   # Use https://search.nixos.org/packages to find packages
   packages = [
-    pkgs.nodejs_20
+    pkgs.nodejs_22  # Updated to match Firebase's Node version
     pkgs.yarn
     pkgs.nodePackages.pnpm
     pkgs.bun
@@ -39,6 +39,7 @@
       previews = {
         web = {
           command = ["npm" "run" "dev" "--" "--port" "$PORT" "--hostname" "0.0.0.0"];
+          manager = "web";
         };
       };
     };

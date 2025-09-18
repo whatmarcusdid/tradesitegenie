@@ -1,6 +1,8 @@
 import { Home } from "lucide-react"
  
-export default {
+const figmaComponent = {
   component: Home,
   name: "Home",
 }
+
+export default figmaComponent

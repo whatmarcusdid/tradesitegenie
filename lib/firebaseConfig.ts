@@ -1,8 +1,9 @@
 'use client';
 
-import { initializeApp, getApps } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth, type Auth } from 'firebase/auth';
-import { getAnalytics } from "firebase/analytics";
+import { getFunctions, connectFunctionsEmulator, Functions } from 'firebase/functions';
+import { getAnalytics, Analytics } from "firebase/analytics";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -15,17 +16,43 @@ const firebaseConfig = {
     measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID!,
 };
 
-export const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 
-/** Returns Auth in the browser; null on SSR/build */
+// Initialize Firebase
+function initializeFirebase() {
+    if (!getApps().length) {
+        return initializeApp(firebaseConfig);
+    }
+    return getApp();
+}
+
+export const app = initializeFirebase();
+
+// Auth
 export function getBrowserAuth(): Auth | null {
   if (typeof window === 'undefined') return null;
   return getAuth(app);
 }
 
-// Only initialize Analytics in the browser
-let analytics;
-if (typeof window !== 'undefined') {
-  analytics = getAnalytics(app);
+// Functions
+let functionsInstance: Functions | null = null;
+export function getFunctionsInstance(): Functions {
+    if (!functionsInstance) {
+        functionsInstance = getFunctions(app);
+        if (process.env.NODE_ENV === 'development') {
+            connectFunctionsEmulator(functionsInstance, 'localhost', 5001);
+        }
+    }
+    return functionsInstance;
 }
-export { analytics };
+
+// Analytics
+let analyticsInstance: Analytics | null = null;
+export function getAnalyticsInstance(): Analytics | null {
+    if (typeof window !== 'undefined') {
+        if (!analyticsInstance) {
+            analyticsInstance = getAnalytics(app);
+        }
+        return analyticsInstance;
+    }
+    return null;
+}
