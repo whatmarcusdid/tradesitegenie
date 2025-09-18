@@ -1,94 +1,66 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { getBrowserAuth } from '@/lib/firebaseConfig';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { createUser } from '@/lib/database';
-import styles from '../../../SignInPage.module.css';
+import styles from './Signup.module.css';
 
 const SignUpPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-  const auth = getBrowserAuth();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
+    const handleSignUp = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            alert("Passwords don't match");
+            return;
+        }
+        // Handle sign-up logic here
+    };
 
-    if (!auth) {
-      setError('Firebase Auth is not available.');
-      return;
-    }
-
-    if (password.length < 6) {
-        setError("Password must be at least 6 characters long.");
-        return;
-    }
-
-    try {
-      // 1. Create user in Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      // Update the user's profile with their name
-      await updateProfile(user, { displayName: name });
-
-      // 2. Create user record in Realtime Database
-      const dbResult = await createUser(user.uid, email, name);
-
-      if (dbResult.success) {
-        // 3. Redirect to checkout for subscription setup
-        router.push('/checkout');
-      } else {
-        setError(dbResult.error?.toString() || 'Failed to create user database record.');
-      }
-    } catch (error: any) {
-      // Handle errors from Firebase Auth or database creation
-      setError(error.message);
-    }
-  };
-
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Create an Account</h1>
-      <form onSubmit={handleSignUp} className={styles.form}>
-      <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className={styles.input}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={styles.input}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password (min. 6 characters)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className={styles.input}
-          required
-        />
-        <button type="submit" className={styles.button}>Sign Up & Proceed to Checkout</button>
-        {error && <p className={styles.error}>{error}</p>}
-      </form>
-      <p className={styles.link}>
-        Already have an account? <Link href="/signin">Sign In</Link>
-      </p>
-    </div>
-  );
+    return (
+        <div className={styles.container}>
+            <div className={styles.formWrapper}>
+                <h1>Sign Up</h1>
+                <form onSubmit={handleSignUp}>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="confirmPassword">Confirm Password</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit" className={styles.signUpButton}>Sign Up</button>
+                </form>
+                <p className={styles.signInLink}>
+                    Already have an account? <Link href="/signin">Sign In</Link>
+                </p>
+            </div>
+        </div>
+    );
 };
 
 export default SignUpPage;

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { MaintenanceTicket } from '@/lib/types';
 import styles from '../Dashboard.module.css';
 
@@ -30,9 +31,9 @@ const SupportTicketsCard = ({ tickets }: SupportTicketsCardProps) => {
             ) : (
                 <p>No support tickets found.</p>
             )}
-            <button className={styles.button} onClick={() => alert('Redirect to create ticket page')}>
-                Create New Ticket
-            </button>
+            <Link href="/tickets/new" passHref>
+                <button className={styles.button}>Create New Ticket</button>
+            </Link>
         </div>
     );
 };

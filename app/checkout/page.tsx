@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { getFunctions, httpsCallable } from 'firebase/functions';
+import { httpsCallable } from 'firebase/functions';
 import { loadStripe } from '@stripe/stripe-js';
 import Protected from '@/components/Protected';
 import { getFunctionsInstance } from '@/lib/firebaseConfig';
@@ -9,6 +9,10 @@ import styles from '../../SignInPage.module.css'; // Reusing styles
 
 // Make sure to replace with your actual publishable key
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+
+interface CheckoutSessionResponse {
+  sessionId: string;
+}
 
 const CheckoutPage = () => {
   const [loading, setLoading] = useState(false);
@@ -25,13 +29,13 @@ const CheckoutPage = () => {
       const successUrl = `${window.location.origin}/dashboard`;
       const cancelUrl = window.location.origin + '/checkout';
 
-      const { data }: any = await createStripeCheckout({ 
+      const result = await createStripeCheckout({ 
         priceId,
         successUrl,
         cancelUrl
        });
 
-      const { sessionId } = data;
+      const { sessionId } = result.data as CheckoutSessionResponse;
 
       const stripe = await stripePromise;
       if (stripe) {
@@ -40,9 +44,13 @@ const CheckoutPage = () => {
           setError(error.message);
         }
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
         console.error("Error creating Stripe checkout session:", err);
-        setError('An unexpected error occurred. Please try again.');
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unexpected error occurred. Please try again.');
+        }
     } finally {
       setLoading(false);
     }

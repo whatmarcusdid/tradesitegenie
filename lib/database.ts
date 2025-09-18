@@ -6,7 +6,7 @@ import { UserData, Subscription, MaintenanceTicket } from '@/lib/types';
 const database = getDatabase(app);
 
 // 1. User Functions
-export const createUser = async (userId: string, email: string, name: string): Promise<{ success: boolean; error?: any }> => {
+export const createUser = async (userId: string, email: string, name: string): Promise<{ success: boolean; error?: Error }> => {
   const userData: UserData = {
     email,
     name,
@@ -19,7 +19,7 @@ export const createUser = async (userId: string, email: string, name: string): P
     return { success: true };
   } catch (error) {
     console.error('Error creating user:', error);
-    return { success: false, error };
+    return { success: false, error: error as Error };
   }
 };
 
@@ -37,7 +37,7 @@ export const getUserData = async (userId: string): Promise<UserData | null> => {
 };
 
 // 2. Subscription Functions
-export const createSubscription = async (subscriptionData: Omit<Subscription, 'subscriptionId' | 'createdAt'>): Promise<{ success: boolean; subscriptionId?: string; error?: any }> => {
+export const createSubscription = async (subscriptionData: Omit<Subscription, 'subscriptionId' | 'createdAt'>): Promise<{ success: boolean; subscriptionId?: string; error?: Error }> => {
   try {
     const newSubscriptionRef = push(ref(database, 'subscriptions'));
     const subscriptionWithDate = {
@@ -50,7 +50,7 @@ export const createSubscription = async (subscriptionData: Omit<Subscription, 's
     return { success: true, subscriptionId: newSubscriptionRef.key! };
   } catch (error) {
     console.error('Error creating subscription:', error);
-    return { success: false, error };
+    return { success: false, error: error as Error };
   }
 };
 
@@ -75,7 +75,7 @@ export const getUserSubscription = async (userId: string): Promise<Subscription 
 };
 
 // 3. Maintenance Ticket Functions
-export const createMaintenanceTicket = async (ticketData: Omit<MaintenanceTicket, 'ticketId' | 'createdAt' | 'status'>): Promise<{ success: boolean; ticketId?: string; error?: any }> => {
+export const createMaintenanceTicket = async (ticketData: Omit<MaintenanceTicket, 'ticketId' | 'createdAt' | 'status'>): Promise<{ success: boolean; ticketId?: string; error?: Error }> => {
   try {
     const newTicketRef = push(ref(database, 'maintenance_tickets'));
     const ticketWithDate = {
@@ -87,7 +87,7 @@ export const createMaintenanceTicket = async (ticketData: Omit<MaintenanceTicket
     return { success: true, ticketId: newTicketRef.key! };
   } catch (error) {
     console.error('Error creating maintenance ticket:', error);
-    return { success: false, error };
+    return { success: false, error: error as Error };
   }
 };
 

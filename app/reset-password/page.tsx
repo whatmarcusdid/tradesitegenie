@@ -28,10 +28,13 @@ const ResetPasswordPage = () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setEmailSent(true);
-    } catch (error: any) {
+    } catch (error: unknown) {
       let errorMessage = 'Failed to send password reset email. Please try again.';
-      if (error.code === 'auth/user-not-found') {
-        errorMessage = 'No user found with this email address.';
+      if (error instanceof Error && 'code' in error) {
+        const firebaseError = error as { code: string };
+        if (firebaseError.code === 'auth/user-not-found') {
+          errorMessage = 'No user found with this email address.';
+        }
       }
       setError(errorMessage);
     } finally {

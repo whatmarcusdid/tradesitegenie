@@ -1,13 +1,11 @@
-import { User } from 'firebase/auth';
 import { UserData } from '@/lib/types';
 import styles from '../Dashboard.module.css';
 
 interface WelcomeCardProps {
-    user: User;
     userData: UserData;
 }
 
-const WelcomeCard = ({ user, userData }: WelcomeCardProps) => {
+const WelcomeCard = ({ userData }: WelcomeCardProps) => {
     return (
         <div className={styles.card}>
             <h2>

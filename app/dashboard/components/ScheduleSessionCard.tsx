@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from '../Dashboard.module.css';
 
 const ScheduleSessionCard = () => {
@@ -10,9 +11,9 @@ const ScheduleSessionCard = () => {
                 Schedule Your Welcome Session
             </h2>
             <p>Get a personalized walkthrough of your new dashboard and services.</p>
-            <button className={styles.button} onClick={() => alert('Redirect to scheduling page')}>
-                Schedule Now
-            </button>
+            <Link href="/scheduling" passHref>
+                <button className={styles.button}>Schedule Now</button>
+            </Link>
         </div>
     );
 };

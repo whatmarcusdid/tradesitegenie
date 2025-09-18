@@ -3,6 +3,10 @@ body {
   padding: 0;
 }
 
+.main-content {
+  padding: 2rem;
+}
+
 .error-message {
   color: #ff0000;
   font-size: 14px;

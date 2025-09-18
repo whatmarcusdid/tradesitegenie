@@ -60,8 +60,12 @@ const CompleteSignUpPage = () => {
       } else {
         setError(dbResult.error?.toString() || 'An unexpected error occurred.');
       }
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+       if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An unexpected error occurred.');
+      }
     }
   };
 

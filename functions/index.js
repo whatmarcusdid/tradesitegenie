@@ -1,8 +1,9 @@
-const { setGlobalOptions } = require("firebase-functions/v2");
-const { onCall, HttpsError } = require("firebase-functions/v2/https");
-const { onRequest } = require("firebase-functions/v2/https");
-const { defineString } = require('firebase-functions/params');
-const admin = require("firebase-admin");
+import { setGlobalOptions } from "firebase-functions/v2";
+import { onCall, HttpsError } from "firebase-functions/v2/https";
+import { onRequest } from "firebase-functions/v2/https";
+import { defineString } from 'firebase-functions/params';
+import * as admin from "firebase-admin";
+import stripe from "stripe";
 
 admin.initializeApp();
 setGlobalOptions({ region: "us-central1" });
@@ -11,9 +12,9 @@ setGlobalOptions({ region: "us-central1" });
 const stripeSecretKey = defineString('STRIPE_SECRET_KEY');
 const stripeWebhookSecret = defineString('STRIPE_WEBHOOK_SECRET');
 
-exports.createStripeCheckout = onCall(async (request) => {
+export const createStripeCheckout = onCall(async (request) => {
     // Initialize stripe inside the function to ensure secrets are loaded
-    const stripe = require("stripe")(stripeSecretKey.value());
+    const stripeClient = new stripe(stripeSecretKey.value());
 
     if (!request.auth) {
         throw new HttpsError('unauthenticated', 'You must be logged in to make a purchase.');
@@ -26,7 +27,7 @@ exports.createStripeCheckout = onCall(async (request) => {
     let customerId = user.customClaims && user.customClaims.stripeCustomerId;
 
     if (!customerId) {
-        const customer = await stripe.customers.create({
+        const customer = await stripeClient.customers.create({
             email: user.email,
             metadata: { userId }
         });
@@ -34,7 +35,7 @@ exports.createStripeCheckout = onCall(async (request) => {
         await admin.auth().setCustomUserClaims(userId, { stripeCustomerId: customerId });
     }
 
-    const session = await stripe.checkout.sessions.create({
+    const session = await stripeClient.checkout.sessions.create({
         payment_method_types: ['card'],
         mode: 'subscription',
         customer: customerId,
@@ -55,16 +56,16 @@ exports.createStripeCheckout = onCall(async (request) => {
     return { sessionId: session.id };
 });
 
-exports.stripeWebhook = onRequest(async (req, res) => {
+export const stripeWebhook = onRequest(async (req, res) => {
     // Initialize stripe inside the function to ensure secrets are loaded
-    const stripe = require("stripe")(stripeSecretKey.value());
+    const stripeClient = new stripe(stripeWebhookSecret.value());
 
     const signature = req.headers['stripe-signature'];
 
     let event;
 
     try {
-        event = stripe.webhooks.constructEvent(req.rawBody, signature, stripeWebhookSecret.value());
+        event = stripeClient.webhooks.constructEvent(req.rawBody, signature, stripeWebhookSecret.value());
     } catch (err) {
         console.error('Webhook signature verification failed.', err.message);
         res.status(400).send(`Webhook Error: ${err.message}`);

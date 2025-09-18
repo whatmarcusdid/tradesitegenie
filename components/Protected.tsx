@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getBrowserAuth } from '@/lib/firebaseConfig';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { isAdmin } from '@/lib/database';
 
 interface ProtectedProps {
@@ -14,7 +14,6 @@ interface ProtectedProps {
 const Protected = ({ children, adminOnly = false }: ProtectedProps) => {
   const router = useRouter();
   const auth = getBrowserAuth();
-  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(false);
 
@@ -26,7 +25,6 @@ const Protected = ({ children, adminOnly = false }: ProtectedProps) => {
 
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setUser(user);
         if (adminOnly) {
           const userIsAdmin = await isAdmin(user.uid);
           if (userIsAdmin) {

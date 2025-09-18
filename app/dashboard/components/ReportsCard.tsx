@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from '../Dashboard.module.css';
 
 const ReportsCard = () => {
@@ -10,9 +11,9 @@ const ReportsCard = () => {
                 Monthly Reports
             </h2>
             <p>Download your latest monthly performance and analytics reports.</p>
-            <button className={styles.button} onClick={() => alert('Redirect to reports download page')}>
-                Download Reports
-            </button>
+            <Link href="/reports" passHref>
+                <button className={styles.button}>Download Reports</button>
+            </Link>
         </div>
     );
 };
