@@ -9,14 +9,16 @@ TradeSiteGenie is an AI-powered website builder tailored for tradespeople. It si
 ### Styling and Layout
 
 - **Global Styles:** A baseline for the application's look and feel is established in `styles/globals.css`.
-- **Header:** A responsive header with navigation links to the Dashboard, Reports, and New Ticket pages.
+- **Header:** A responsive header with navigation links to the Dashboard, Reports, and New Ticket pages. The header is dynamic and shows a "Sign Out" button when the user is logged in, and a "Sign In" button otherwise.
 - **Footer:** A simple footer with copyright information.
 - **Main Content Area:** A padded main content area for comfortable viewing.
 
 ### Authentication
 
-- **Sign-In Page:** A user interface for existing users to sign in. Includes fields for email and password, and a link to the sign-up page.
-- **Sign-Up Page:** A user interface for new users to create an account. Includes fields for email, password, and password confirmation, and a link to the sign-in page.
+- **Firebase Integration:** The application is connected to a Firebase project for user authentication.
+- **Sign-In Page:** A functional sign-in page that authenticates users with Firebase.
+- **Sign-Up Page:** A functional sign-up page that creates new users in Firebase.
+- **Sign-Out Functionality:** A "Sign Out" button in the header that signs the user out of Firebase and redirects them to the sign-in page.
 
 ### Core Application Pages
 
@@ -24,12 +26,14 @@ TradeSiteGenie is an AI-powered website builder tailored for tradespeople. It si
 - **Reports:** A placeholder page for displaying user reports.
 - **New Ticket:** A placeholder page for creating a new support ticket.
 
-## Current Plan
+## Current Plan: Protect Application Routes
 
-### Initial Setup and Basic Layout (Completed)
-
-1.  **Initialize Project:** Set up the Next.js project with the necessary dependencies.
-2.  **Create Basic Layout:** Design and implement a global layout with a header, footer, and main content area.
-3.  **Implement Authentication Pages:** Build the UI for the sign-in and sign-up pages.
-4.  **Create Core Application Pages:** Develop placeholder pages for the Dashboard, Reports, and New Ticket sections.
-5.  **Update Blueprint:** Document all implemented features in the `blueprint.md` file.
+1.  **Protect Routes:**
+    *   Create a custom hook or higher-order component to check the user's authentication state.
+    *   Redirect unauthenticated users from protected pages (Dashboard, Reports, New Ticket) to the sign-in page.
+2.  **Dashboard Functionality:**
+    *   Flesh out the dashboard page with actual content and functionality. This could include displaying a list of websites, a summary of recent activity, or other relevant information.
+3.  **Reports Functionality:**
+    *   Implement the reports page, allowing users to view analytics and other data related to their websites.
+4.  **New Ticket Functionality:**
+    *   Implement the new ticket page, allowing users to create and submit support tickets.
