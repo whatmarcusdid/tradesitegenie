@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { getBrowserAuth } from '@/lib/firebaseConfig';
 import { User } from 'firebase/auth';
 import { createUser, getUserData } from '@/lib/database';
-import styles from '../../../SignInPage.module.css';
+import styles from './CompleteSignup.module.css';
 
 const CompleteSignUpPage = () => {
   const [name, setName] = useState('');

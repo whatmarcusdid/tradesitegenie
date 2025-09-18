@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { getBrowserAuth } from '@/lib/firebaseConfig';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import styles from '../../SignInPage.module.css'; // Reusing styles for consistency
+import styles from './ResetPassword.module.css'; // Reusing styles for consistency
 
 const ResetPasswordPage = () => {
   const [email, setEmail] = useState('');

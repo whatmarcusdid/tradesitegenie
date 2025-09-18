@@ -34,8 +34,10 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ sessionId: session.id });
-  } catch (error: any) {
-    console.error('Stripe Error:', error.message);
-    return new NextResponse(error.message, { status: 500 });
+  } catch (error: unknown) {
+    let message = 'Unknown error';
+    if (error instanceof Error) message = error.message;
+    console.error('Stripe Error:', message);
+    return new NextResponse(message, { status: 500 });
   }
 }

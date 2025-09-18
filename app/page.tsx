@@ -10,9 +10,9 @@ import {
   OAuthProvider,
 } from 'firebase/auth';
 import { getBrowserAuth } from '@/lib/firebaseConfig';
-import styles from './SignInPage.module.css';
+import styles from './page.module.css';
 
-const SignInPage = () => {
+const HomePage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -167,4 +167,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default HomePage;
