@@ -74,9 +74,19 @@ export const stripeWebhook = onRequest(async (req, res) => {
 
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
-        const userId = session.metadata.userId;
+        
+        // Unified User ID Retrieval
+        const userId = session.metadata.userId || session.client_reference_id;
+
+        if (!userId) {
+            console.error('Webhook Error: No userId found in session metadata or client_reference_id.');
+            res.status(400).send('Webhook Error: Missing user identifier.');
+            return;
+        }
+
         const stripeSubscriptionId = session.subscription;
         const stripeCustomerId = session.customer;
+        // The 'plan' can be retrieved from the first item in the line_items array
         const plan = session.line_items.data[0].price.id;
 
         const subscriptionRef = admin.database().ref('subscriptions').push();
