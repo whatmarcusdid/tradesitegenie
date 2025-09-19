@@ -1,7 +1,3 @@
-import NewDashboardPage from './NewDashboard';
-
-const DashboardPage = () => {
-    return <NewDashboardPage />;
-};
-
-export default DashboardPage;
+export default function Dashboard() {
+  return <div className="p-8">Page content will be rebuilt</div>;
+}

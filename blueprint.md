@@ -2,54 +2,43 @@
 
 ## Overview
 
-This project is a Next.js application that provides a trade business with a platform to showcase their services, share blog posts, and manage user authentication. The application is built with a modern tech stack, including Next.js, React, TypeScript, and Firebase for backend services. The dashboard has been recently updated to a modern, single-page design for an improved user experience.
+This document outlines the structure and components of the TradeSiteGenie application.
 
-## Features
+## Implemented Features
 
-### Implemented Features:
+### Styling and Design
 
-*   **User Authentication:**
-    *   Sign up, sign in, and sign out functionality.
-    *   Password reset functionality.
-    *   Protected routes that require authentication.
-*   **Blog:**
-    *   Fetches blog posts from a Notion database.
-    *   Displays a list of blog posts.
-    *   Displays individual blog posts.
-*   **Checkout:**
-    *   A checkout page for users to purchase services.
-*   **Dashboard:**
-    *   A modern, single-page user dashboard built with TailwindCSS, accessible only to authenticated users.
-    *   It consolidates various informational cards (Welcome, Analytics, Hours, Subscription, etc.) into a single, cohesive interface.
+*   **Global Styles**: Basic global styles are defined in `app/globals.css`.
+*   **Component-Specific Styles**: Individual components utilize CSS Modules for styling (e.g., `Footer.module.css`).
+*   **Tailwind CSS**: The project is set up with Tailwind CSS for utility-first styling.
 
-### Styling and Design:
+### Components
 
-*   The application utilizes a combination of **CSS modules** for component-level styling and **TailwindCSS** for utility-first styling, as seen in the new dashboard.
-*   The design is clean, modern, and responsive.
+*   **`Header`**: Located at `components/ui/Header.tsx`, this component provides the main navigation for the application. It displays different links based on the user's authentication status.
+*   **`Footer`**: A simple footer component that displays a copyright notice.
+*   **`Protected`**: A higher-order component used to protect routes that require authentication. It can also be configured to restrict access to admin users only.
+*   **`Button`**: A reusable button component.
 
-## Recent Refactoring: Modern Dashboard
+### Authentication
 
-The previous dashboard implementation, which was composed of multiple individual card components and styled with CSS modules, has been completely replaced with a more modern and streamlined solution.
+*   **Firebase Authentication**: The application uses Firebase for user authentication.
+*   **Sign-in/Sign-up**: The application includes pages for user sign-in and sign-up, located at `app/signin/page.tsx` and `app/signup/page.tsx` respectively.
+*   **Authentication State**: The `Header` component dynamically changes its content based on the user's authentication state.
 
-### Steps Completed:
+### Routing
 
-1.  **New Dashboard Creation:**
-    *   A new, single-file dashboard component was created at `app/dashboard/NewDashboard.tsx`.
-    *   This component now contains the entire layout and UI for the dashboard, using TailwindCSS for styling.
+*   **`app/layout.tsx`**: The main layout file that includes the `Header` and `Footer` components.
+*   **`app/dashboard/layout.tsx`**: A protected layout for the dashboard section of the application.
+*   **`app/page.tsx`**: The main landing page.
+*   **`app/dashboard/page.tsx`**: The main dashboard page.
+*   **`app/reports/page.tsx`**: A page for displaying reports.
+*   **`app/scheduling/page.tsx`**: A page for scheduling.
+*   **`app/signin/page.tsx`**: The user sign-in page.
+*   **`app/signup/page.tsx`**: The user sign-up page.
+*   **`app/tickets/new/page.tsx`**: A page for creating new maintenance tickets.
 
-2.  **Component Consolidation:**
-    *   The functionality and UI of all previous card components (`WelcomeCard`, `AnalyticsCard`, `HoursCounterCard`, etc.) were merged directly into the `NewDashboard.tsx` component.
+## Current Plan
 
-3.  **Cleanup of Old Components:**
-    *   All the old, individual card component files located in `app/dashboard/components/` were deleted.
-    *   The associated CSS module file, `Cards.module.css`, was also removed.
-    *   The original `app/dashboard/page.tsx` was updated to simply render the new `NewDashboard.tsx` component.
-
-4.  **Code Quality and Linting:**
-    *   A full linting pass was performed using `npm run lint -- --fix`.
-    *   All reported issues were resolved, including:
-        *   Removing unused component imports.
-        *   Fixing an unescaped apostrophe in the JSX.
-        *   Replacing a `require()` statement in `tailwind.config.ts` with the standard `import` syntax.
-
-This refactoring effort has resulted in a cleaner, more maintainable codebase and a more modern, user-friendly dashboard interface.
+*   **Analyze the codebase:** I will analyze the codebase to understand the current implementation of the scheduling feature.
+*   **Identify areas for improvement:** I will identify areas where the scheduling feature can be improved, such as adding more advanced booking options, improving the user interface, and adding more robust error handling.
+*   **Implement the improvements:** I will implement the identified improvements to the scheduling feature.

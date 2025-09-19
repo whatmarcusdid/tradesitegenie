@@ -119,4 +119,3 @@ export const isAdmin = async (userId: string): Promise<boolean> => {
     return false;
   }
 };
-

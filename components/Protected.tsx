@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getBrowserAuth } from '@/lib/firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
-import { isAdmin } from '@/lib/database';
+import { isAdmin } from '@/lib/database-client';
 
 interface ProtectedProps {
   children: React.ReactNode;
