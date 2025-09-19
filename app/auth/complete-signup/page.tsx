@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { getBrowserAuth } from '@/lib/firebaseConfig';
 import { User } from 'firebase/auth';
 import { createUser, getUserData } from '@/lib/database';
-import styles from './CompleteSignup.module.css';
 
 const CompleteSignUpPage = () => {
   const [name, setName] = useState('');
@@ -74,21 +73,23 @@ const CompleteSignUpPage = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Complete Your Profile</h1>
-      <p>Welcome! Please enter your name to finish setting up your account.</p>
-      <form onSubmit={handleCompleteSignUp} className={styles.form}>
-      <input
-          type="text"
-          placeholder="Your Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className={styles.input}
-          required
-        />
-        <button type="submit" className={styles.button}>Save and Continue</button>
-        {error && <p className={styles.error}>{error}</p>}
-      </form>
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Complete Your Profile</h1>
+        <p className="text-gray-600 mb-6">Welcome! Please enter your name to finish setting up your account.</p>
+        <form onSubmit={handleCompleteSignUp}>
+        <input
+            type="text"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+          <button type="submit" className="w-full mt-4 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save and Continue</button>
+          {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+        </form>
+      </div>
     </div>
   );
 };
